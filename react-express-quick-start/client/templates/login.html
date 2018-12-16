@@ -1,0 +1,49 @@
+{% extends "layout/layout.html" %}
+
+{% block content %}
+<div>
+  <h1 class="animated infinite flash">SINGIN</h1>
+  <form action="/signin" method="post">
+    <div>
+      <label>Username:</label>
+      <input type="text" name="username" autocomplete='username' />
+    </div>
+    <div>
+      <label>First Name:</label>
+      <input type="text" name="firstname" autocomplete='given-name' />
+    </div>
+    <div>
+      <label>Last Name:</label>
+      <input type="text" name="lastname" autocomplete='family-name' />
+    </div>
+    <div>
+      <label>Email:</label>
+      <input type="text" name="email" autocomplete='email' />
+    </div>
+    <div>
+      <label>Password:</label>
+      <input type="password" name="password" autocomplete="current-password" />
+    </div>
+    <div>
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <input type="submit" value="Sign In" />
+    </div>
+  </form>
+  <hr />
+  <h1 class="animated infinite flash">LOGIN</h1>
+  <form action="/login" method="post">
+    <div>
+      <label>Username:</label>
+      <input type="text" name="username" autocomplete='username' />
+    </div>
+    <div>
+      <label>Password:</label>
+      <input type="password" name="password" autocomplete="current-password" />
+    </div>
+    <div>
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <input type="submit" value="Log In" />
+    </div>
+  </form>
+</div>
+{% endblock %}

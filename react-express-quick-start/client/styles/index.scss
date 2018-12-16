@@ -1,0 +1,14 @@
+@import "setting/custom";
+@import "~bootstrap/scss/bootstrap";
+@import "~animate.css";
+
+@import "setting/color";
+@import "setting/layout";
+
+@import "components/loader";
+@import "components/maintenance";
+@import "components/header";
+@import "components/footer";
+
+@import "pages/index";
+

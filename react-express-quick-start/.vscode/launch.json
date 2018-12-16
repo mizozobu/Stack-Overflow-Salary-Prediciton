@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Server: Attach",
+      "restart": true,
+      "internalConsoleOptions": "neverOpen",
+      "processId": "${command:PickProcess}",
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Server: Launch",
+      "runtimeExecutable": "nodemon",
+      "runtimeArgs": [
+        "--inspect",
+        "server/app.js",
+      ],
+      "port": 9229,
+      "restart": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Client: Launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceRoot}"
+    },
+  ],
+  "compounds": [
+    {
+      "name": "Launch Both",
+      "configurations": ["Server: Launch", "Client: Launch"]
+    },
+  ],
+}
+

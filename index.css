@@ -1,0 +1,66 @@
+html,
+body {
+  font-family: Roboto, Verdana, sans-serif;
+  color: #f2f2f2;
+  background: linear-gradient(225deg, #00d4ff, #000000);
+  min-height: 100%;
+}
+
+html.page-short {
+  height: 100%;
+}
+
+.card {
+  border-width: 3px;
+  transition: background-color 1s ease;
+}
+
+.card:hover {
+  background-color: rgba(0, 212, 255, 0.2);
+}
+
+.bg-none {
+  background-color: transparent;
+}
+
+a.link-normal {
+  color: #f2f2f2;
+}
+
+a.link-normal:hover {
+  text-decoration: none;
+}
+
+.btn-navy {
+  color: #f2f2f2;
+  background-color: rgb(15, 73, 85);
+}
+
+.btn-navy:hover {
+  color: #f2f2f2;
+  background-color: rgb(15, 73, 85);;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+  background-color: rgb(15, 73, 85);
+}
+
+.custom-radio .custom-control-input:checked~.custom-control-label::before {
+  background-color: rgb(15, 73, 85);
+}
+
+.custom-range::-webkit-slider-thumb {
+  background-color: rgb(15, 73, 85);
+}
+
+.custom-range::-webkit-slider-thumb:active {
+  background-color: rgba(15, 73, 85, 0.8);
+}
+
+.btn-back {
+  z-index: 999;
+}
