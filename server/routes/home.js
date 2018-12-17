@@ -1,45 +1,46 @@
 const request = require('request');
+const logger = require('logger')('app.js');
 
 let actions = {};
 let api = {};
 
-actions.index = async (req, res) => {
+actions.index = async(req, res) => {
   return res.render('index');
 };
 
-actions.predict = async (req, res) => {
+actions.predict = async(req, res) => {
   return res.render('predict');
 };
 
-api.predict = async (req, res) => {
+api.predict = async(req, res) => {
   const data = req.body;
 
   const body = {
-    "Inputs": {
-      "input1": {
-        "ColumnNames": [
-          "Country",
-          "SalaryType",
-          "ConvertedSalaryInt",
-          "AgreeDisagree2",
-          "WakeTime",
-          "MilitaryUS",
-          "DevType_Full-stack developer",
-          "LanguageWorkedWith_SQL",
-          "LanguageWorkedWith_TypeScript",
-          "PlatformWorkedWith_Android",
-          "FrameworkWorkedWith_Angular",
-          "FrameworkWorkedWith_Node.js",
-          "IDE_Sublime Text",
-          "SelfTaughtTypes_Online developer communities other than Stack Overflow (ex. forums, listservs, IRC channels, etc.)",
-          "CommunicationTools_Trello",
-          "RaceEthnicity_White or of European descent"
+    'Inputs': {
+      'input1': {
+        'ColumnNames': [
+          'Country',
+          'SalaryType',
+          'ConvertedSalaryInt',
+          'AgreeDisagree2',
+          'WakeTime',
+          'MilitaryUS',
+          'DevType_Full-stack developer',
+          'LanguageWorkedWith_SQL',
+          'LanguageWorkedWith_TypeScript',
+          'PlatformWorkedWith_Android',
+          'FrameworkWorkedWith_Angular',
+          'FrameworkWorkedWith_Node.js',
+          'IDE_Sublime Text',
+          'SelfTaughtTypes_Online developer communities other than Stack Overflow (ex. forums, listservs, IRC channels, etc.)',
+          'CommunicationTools_Trello',
+          'RaceEthnicity_White or of European descent'
         ],
-        "Values": [
+        'Values': [
           [
             data['country'],
-            "Yearly",
-            "0",
+            'Yearly',
+            '0',
             data['agreedisagree2'] || 'NA',
             data['waketime'] || 'NA',
             data['militaryus'] || 'NA',
@@ -57,8 +58,8 @@ api.predict = async (req, res) => {
         ]
       }
     },
-    "GlobalParameters": {}
-  }
+    'GlobalParameters': {}
+  };
 
   const options = {
     method: 'POST',
@@ -73,14 +74,14 @@ api.predict = async (req, res) => {
 
   request(options, (err, response, body) => {
     if (err) {
-      console.log('error:', JSON.stringify(error));
+      logger.error(JSON.stringify(err));
       return res.json({
         ok: false,
       });
     }
 
-    r = JSON.parse(response.body)
-    result = r.Results.output1.value.Values[0][0];
+    const r = JSON.parse(response.body);
+    const result = r.Results.output1.value.Values[0][0];
 
     return res.json({
       ok: true,
@@ -89,11 +90,11 @@ api.predict = async (req, res) => {
   });
 };
 
-actions.recommend = async (req, res) => {
+actions.recommend = async(req, res) => {
   return res.render('recommend');
 };
 
-api.recommend = async (req, res) => {
+api.recommend = async(req, res) => {
   return res.render('recommend');
 };
 

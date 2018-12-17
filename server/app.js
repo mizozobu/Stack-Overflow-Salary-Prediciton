@@ -5,7 +5,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const nunjucks = require('nunjucks');
-const bs = require('browser-sync');
 const path = require('path');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -20,6 +19,7 @@ const isDev = (app.get('env') === 'development');
 
 //browsersync
 if (isDev) {
+  const bs = require('browser-sync');
   bs.create().init({
     open: false,
     files: [
@@ -70,5 +70,5 @@ if (isDev) {
   server.listen(appConfig.PORT_DEV);
 }
 else {
-  server.listen(3000);
+  server.listen(process.env.PORT || 3000);
 }

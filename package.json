@@ -1,14 +1,12 @@
 {
-  "name": "express-quick-start",
+  "name": "whatsyourvalue",
   "version": "1.0.0",
   "description": "",
   "main": "server/app.js",
   "scripts": {
-    "build": "npm run build:dev",
-    "build:dev": "webpack --mode development --watch",
-    "build:prod": "webpack --mode production",
+    "start": "npm run server:prod",
     "server": "npm run server:dev",
-    "server:dev": "nodemon app.js",
+    "server:dev": "nodemon server/app.js",
     "server:prod": "node server/app.js",
     "test": "echo no test yet"
   },
@@ -30,6 +28,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.2.0",
     "body-parser": "^1.18.3",
+    "browser-sync": "^2.26.3",
     "dotenv": "^6.0.0",
     "eazy-logger": "^3.0.2",
     "express": "^4.16.3",
@@ -47,7 +46,6 @@
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.24.7",
     "eslint": "^5.0.1",
     "nodemon": "^1.18.4"
   }

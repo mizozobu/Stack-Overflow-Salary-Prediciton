@@ -1,0 +1,91 @@
+html,
+body {
+  font-family: Roboto, Verdana, sans-serif;
+  color: #f2f2f2;
+  background: linear-gradient(225deg, #00d4ff, #000000);
+  min-height: 100%;
+}
+
+html.page-short {
+  height: 100%;
+}
+
+.card {
+  border-width: 3px;
+  transition: background-color 1s ease;
+}
+
+.card:hover {
+  background-color: rgba(0, 212, 255, 0.2);
+}
+
+.bg-none {
+  background-color: transparent;
+}
+
+a.link-normal {
+  color: #f2f2f2;
+}
+
+a.link-normal:hover {
+  text-decoration: none;
+}
+
+.btn-navy {
+  color: #f2f2f2;
+  background-color: rgb(15, 73, 85);
+}
+
+.btn-navy:hover {
+  color: #f2f2f2;
+  background-color: rgb(15, 73, 85);;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+  background-color: rgb(15, 73, 85);
+}
+
+.custom-radio .custom-control-input:checked~.custom-control-label::before {
+  background-color: rgb(15, 73, 85);
+}
+
+.custom-range::-webkit-slider-thumb {
+  background-color: rgb(15, 73, 85);
+}
+
+.custom-range::-webkit-slider-thumb:active {
+  background-color: rgba(15, 73, 85, 0.8);
+}
+
+.btn-back {
+  z-index: 999;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 5px solid #f2f2f2;
+  border-color: #f2f2f2 transparent #f2f2f2 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
