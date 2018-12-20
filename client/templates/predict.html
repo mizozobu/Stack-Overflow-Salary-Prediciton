@@ -24,7 +24,7 @@
       <i class="far fa-arrow-alt-circle-left"></i> Back
     </a>
     <div class="col-lg-6">
-      <form class="p-5 m-lg-5">
+      <form id="data" class="p-5 m-lg-5">
         <div class="form-group my-4">
           <label class="h5" for="country">In which country do you currently reside?</label>
           <select class="form-control" name="country" id="country">
@@ -377,8 +377,8 @@
                 </label>
               </div>
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="bask/shell" id="bask/shell" value="Yes">
-                <label class="custom-control-label cursor-pointer" for="bask/shell">
+                <input type="checkbox" class="custom-control-input" name="bash/shell" id="bash/shell" value="Yes">
+                <label class="custom-control-label cursor-pointer" for="bash/shell">
                   Bash/Shell
                 </label>
               </div>
@@ -449,9 +449,9 @@
                 </label>
               </div>
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="Lua" id="Lua" value="Yes">
-                <label class="custom-control-label cursor-pointer" for="Lua">
-                  lua
+                <input type="checkbox" class="custom-control-input" name="lua" id="lua" value="Yes">
+                <label class="custom-control-label cursor-pointer" for="lua">
+                  Lua
                 </label>
               </div>
               <div class="custom-control custom-checkbox">
@@ -538,6 +538,12 @@
                 <input type="checkbox" class="custom-control-input" name="perl" id="perl" value="Yes">
                 <label class="custom-control-label cursor-pointer" for="perl">
                   Perl
+                </label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="cobol" id="cobol" value="Yes">
+                <label class="custom-control-label cursor-pointer" for="cobol">
+                  Cobol
                 </label>
               </div>
               <div class="custom-control custom-checkbox">
@@ -827,8 +833,7 @@
           </div>
         </div>
         <div class="form-group my-4">
-          <label class="h5">Which of the following frameworks have you done extensive development work in over the past
-            year?</label>
+          <label class="h5">Which development environment(s) do you use regularly? Please check all that apply.</label>
           <div class="row no-gutters">
             <div class="col-6">
               <div class="custom-control custom-checkbox">
@@ -1263,10 +1268,11 @@
         <div class="d-flex flex-column justify-content-center my-4 h2">
           <span id="resultHeading"></span>
           <div id="predictedSalary" class="my-5 text-center"></div>
-          </div>
+          <div id="savePrompt" class="my-5 text-center"></div>
         </div>
       </div>
     </div>
+  </div>
   </div>
   <script>
     window.onload = function () {
@@ -1286,11 +1292,13 @@
       }
     };
 
-    $('form').on('submit', e => {
+    $('form#data').on('submit', e => {
       e.preventDefault();
       $('#resultHeading').text('Calculating ...');
       $('#predictedSalary').html('<div class="lds-dual-ring"></div>');
-      $('html, body').animate({ scrollTop: 0 }, 500);
+      $('html, body').animate({
+        scrollTop: 0
+      }, 500);
       $.ajax({
         url: "/_api/predict",
         type: "post",
@@ -1300,13 +1308,58 @@
             var salary = numberWithCommas(Math.round(res.result))
             $('#resultHeading').text('Your can make:');
             $('#predictedSalary').html('$<span class=\'animated zoomIn\'>' + salary + '</span> / year');
+            $('#savePrompt').html(
+              '<button id="show-save-form" class="btn btn-navy align-self-center">Save your data in our model</button>'
+            );
+            $('#show-save-form').on('click', () => {
+              $('#savePrompt').html(
+                '\
+                <form id="more">\
+                  <label class="h5" for="country">What is your salary?</label>\
+                    <select class="form-control" name="salaryType" id="salaryType">\
+                      <option>Yearly</option>\
+                      <option>Monthly</option>\
+                      <option>Weekly</option>\
+                    </select>\
+                  <label class="h5" for="country">What is your yearly salary in US dollar?</label>\
+                  <input id="salary" name="salary" type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Entry your salary">\
+                  <button id="btn-save" type="submit" class="btn btn-navy">Submit</button>\
+                </form>\
+              '
+              );
+              $('form#more').on('submit', e => {
+                e.preventDefault();
+                var data = $('form#data').serialize();
+                var more = $('form#more').serialize();
+                $('#savePrompt').html('<div class="lds-dual-ring"></div>');
+
+                $.ajax({
+                  url: "/_api/save",
+                  type: "post",
+                  data: {
+                    data,
+                    more,
+                  },
+                  success: function (res) {
+                    if (res.ok) {
+                      $('#savePrompt').text('Thank you!');
+                    }
+                  },
+                  error: function (xhr) {
+                    $('#savePrompt').html(
+                      '<span class="text-danger">Sorry, something went wrong.</span>');
+                  }
+                });
+              });
+            });
           }
         },
         error: function (xhr) {
-          console.log('Error')
+          $('#resultHeading').html('<span class="text-danger">Sorry, something went wrong.</span>');
+          $('#predictedSalary').html('');
         }
       });
-    })
+    });
 
     function numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

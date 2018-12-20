@@ -10,7 +10,7 @@ class AppConfig {
     this.SERVER_DIR = path.join(this.ROOT_DIR, 'server');
     this.MODEL_DIR = path.join(this.SERVER_DIR, 'models');
     this.ROUTE_DIR = path.join(this.SERVER_DIR, 'routes');
-    this.SERVICE_DIR = path.join(this.SERVER_DIR, 'service');
+    this.SERVICE_DIR = path.join(this.SERVER_DIR, 'services');
     this.LANGUAGE = 'en';
   }
 }

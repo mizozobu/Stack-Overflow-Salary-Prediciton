@@ -8,6 +8,7 @@ const nunjucks = require('nunjucks');
 const path = require('path');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const sql = require('mssql');
 const app = express();
 const server = http.createServer(app);
 
@@ -65,6 +66,16 @@ app.use('/media', express.static(path.join(appConfig.STATIC_DIR, 'media')));
 
 //routes
 routes(app);
+
+//db
+(async() => {
+  try {
+    await sql.connect('mssql://jd415:415MarkKieth415@stackoverflow415.database.windows.net/StackOverFlowDB1?encrypt=true');
+  }
+  catch(err) {
+    logger.error(err);
+  }
+})();
 
 if (isDev) {
   server.listen(appConfig.PORT_DEV);

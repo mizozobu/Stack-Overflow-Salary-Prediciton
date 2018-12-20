@@ -6,4 +6,6 @@ module.exports = app => {
   app.post('/_api/predict', home.api.predict);
   app.get('/recommend', home.actions.recommend);
   app.post('/_api/recommend', home.api.recommend);
+  app.post('/_api/save', home.api.save);
+  app.get('/tableau', home.actions.tableau);
 };
